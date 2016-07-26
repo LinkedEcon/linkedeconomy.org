@@ -1,0 +1,16 @@
+name = Couchdb
+description = Integration between CouchDB and Drupal.
+package = Couchdb
+core = 7.x
+files[] = includes/couchdb.inc
+files[] = includes/couchdb.database.inc
+files[] = includes/couchdb.design.inc
+;Test files
+files[] = tests/couchdb.test
+
+; Information added by drupal.org packaging script on 2013-09-30
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "couchdb"
+datestamp = "1380567748"
+

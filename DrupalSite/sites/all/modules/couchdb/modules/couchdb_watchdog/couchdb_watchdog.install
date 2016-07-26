@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ * CouchDB Watchdog install
+ * 
+ * Copyright (c) 2010-2011 DOCOMO Communications Laboratories USA, Inc.
+ */
+
+/**
+ * Implements hook_install()
+ */
+function couchdb_watchdog_install() {
+  couchdb_watchdog_create_database();
+}
+
+function couchdb_watchdog_create_database() {
+  // create the watchdog database
+  $couch = new CouchDB();
+  $result = $couch->createDatabase('drupal_watchdog');
+
+  // setup the design document
+  $document = array(
+    'language' => 'javascript',
+    'views' => array(
+      'list_by_date' => array(
+        'map' => 'function (doc) {if (doc) {emit([doc.timestamp], doc);}}',
+        'reduce' => '_count',
+      ),
+      'list_by_type_severity' => array(
+        'map' => "function (doc) {if (doc) {emit([doc.type,doc.severity], doc, 'type');}}",
+        'reduce' => '_count',
+      ),
+      'list_by_type' => array(
+        'map' => "function (doc) {if (doc) {emit(doc.type, doc);}}",
+        'reduce' => '_count',
+      ),
+      'list_by_severity' => array(
+        'map' => 'function (doc) {if (doc) {emit(doc.severity, doc);}}',
+        'reduce' => '_count',
+      ),
+      'list_by_user' => array(
+        'map' => 'function (doc) {if (doc) {emit([doc.user.name], doc);}}',
+        'reduce' => '_count',
+      ),
+      'distinct_types' => array(
+        'map' => 'function (doc) {emit(doc.type, doc.severity);}',
+        'reduce' => 'function(keys, values) {return true;}'
+      ),
+    ),
+  );
+  
+  $result = $couch->getDatabase('drupal_watchdog')->storeDesignDocument('drupal_watchdog_view', $document);
+  return $result;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function couchdb_watchdog_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'install' || $phase == 'runtime') {
+    $couch_vars = variable_get('couchdb', FALSE);
+    if (!$couch_vars) {
+      $requirements['couchdb_watchdog'] = array(
+        'severity' => REQUIREMENT_ERROR,
+        'title' => $t('CouchDB Watchdog'),
+        'description' => $t('CouchDB Watchdog cannot be installed.  CouchDB connection setting not set. CouchDB cannot be reached. Make sure the $conf[\'couchdb\'] variable is set in settings.php.'),
+      );
+    }
+  }
+  if ($phase == 'runtime') {
+    try {
+      $couch = new CouchDB();
+    }
+    catch (Exception $e) {
+      $requirements['couchdb_watchdog']['severity'] = REQUIREMENT_ERROR;
+      $requirements['couchdb_watchdog']['title'] = $t('CouchDB Watchdog');
+      $requirements['couchdb_watchdog']['value'] = $t('CouchDB connection setting not set. CouchDB cannot be reached. Make sure the $conf[\'couchdb\'] variable is set in settings.php.');
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall() 
+ */
+function couchdb_watchdog_uninstall() {
+  // uninstall the watchdog database
+  $couch = new CouchDB();
+  $couch->deleteDatabase('drupal_watchdog');
+}

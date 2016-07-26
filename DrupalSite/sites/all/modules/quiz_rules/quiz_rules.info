@@ -1,0 +1,9 @@
+name = Quiz Rules
+package = Quiz Addon
+description = "Provides rules integration for the quiz module."
+dependencies[] = quiz
+dependencies[] = rules
+
+files[] = quiz_rules.test
+core = 7.x
+

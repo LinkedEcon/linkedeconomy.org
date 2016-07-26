@@ -1,0 +1,451 @@
+/************************************************************************************/
+/************************************************************************************/
+/************************************ Typography ************************************/
+/************************************************************************************/
+/************************************************************************************/
+
+.block-title:before,
+.block-title-small:before {
+  color: #5daed5;
+}
+
+.textcolor {
+  color: #5daed5;
+}
+
+/* Blockquotes */
+blockquote {
+   border-left: 1px solid #5daed5;
+}
+
+blockquote.pull-right {
+   border-right: 1px solid #5daed5;
+}
+
+
+
+
+
+
+/***********************************************************************************/
+/***********************************************************************************/
+/************************************** Links **************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+
+a {
+  color: #5daed5;
+}
+
+li a.active {
+  color: #5daed5;
+}
+
+
+
+
+
+
+/***********************************************************************************/
+/***********************************************************************************/
+/************************************* Regions *************************************/
+/***********************************************************************************/
+/***********************************************************************************/
+
+/*************************************/
+/**** footer four columns regions ****/
+/*************************************/
+
+#footer-four-columns a:hover,
+#footer-four-columns a:focus {
+  color: #5daed5;
+}
+
+
+
+/*************************************/
+/*********** footer region ***********/
+/*************************************/
+
+footer a:hover,
+footer a:focus {
+  color: #5daed5;
+}
+
+
+
+
+
+
+/**********************************************************************************/
+/**********************************************************************************/
+/************************************** Menu **************************************/
+/**********************************************************************************/
+/**********************************************************************************/
+
+/*************************************/
+/********** Main navigation **********/
+/*************************************/
+
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus {
+  color: #5daed5;
+  border-bottom: 1px solid #5daed5;
+}
+
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus {
+  color: #5daed5;
+  border-bottom: 1px solid #5daed5;
+}
+
+/* Dropdown menu */
+li.dropdown:hover > a {
+  color: #5daed5;
+}
+
+.dropdown-menu {
+  border-top: 1px solid #5daed5;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  color: #5daed5;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  color: #5daed5;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #5daed5;
+}
+
+
+
+/*************************************/
+/******** Administration menu ********/
+/*************************************/
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus,
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover,
+.nav-pills > .active > a:focus {
+  color: #5daed5;
+}
+
+
+
+
+
+
+/************************************************************************************/
+/************************************************************************************/
+/************************************** Slider **************************************/
+/************************************************************************************/
+/************************************************************************************/
+
+/*************************************/
+/************ Nivo Slider ************/
+/*************************************/
+
+.theme-default .nivo-controlNav a.active {
+	color: #5daed5;
+}
+
+
+
+/*************************************/
+/********** Sequence Slider **********/
+/*************************************/
+
+.sequence-preloader .preloading .circle {
+    fill: #5daed5;
+}
+
+
+
+
+
+
+/*********************************************************************************/
+/*********************************************************************************/
+/*********************************** Portfolio ***********************************/
+/*********************************************************************************/
+/*********************************************************************************/
+
+.portfolio-item:hover .portfolio-title {
+  border-bottom: 1px solid #5daed5;
+}
+
+.portfolio-item .portfolio-title a:hover {
+  color: #5daed5;
+}
+
+/* Portfolio Block Version 2 */
+
+.portfolio-block-2 .portfolio2-item a {
+  background: #5daed5;
+}
+
+
+
+
+
+
+/********************************************************************************/
+/********************************************************************************/
+/************************************ Blocks ************************************/
+/********************************************************************************/
+/********************************************************************************/
+
+/****************************/
+/********** Panels **********/
+/****************************/
+
+/* Panels Version 1 */
+.panel .panel-icon .icon {
+	box-shadow: 0 0 0 2px #5daed5;
+}
+
+.panel .panel-icon .icon:after {
+  background: #5daed5;
+}
+
+.panel:hover .panel-icon .icon {
+	color: #5daed5;
+}
+
+.panel:hover .panel-info h3 {
+   color: #5daed5;
+}
+
+/* Panels Version 2 */
+
+.panel-2:hover h4 {
+  color: #5daed5;
+}
+
+.panel-2 .panel-icon {
+  box-shadow: 0 0 0 1px #5daed5;
+}
+
+.panel-2 .panel-icon:after {
+  background: #5daed5;
+}
+
+.panel-2:hover .panel-icon {
+  color: #5daed5;
+}
+
+
+
+/****************************/
+/******* Testimonials *******/
+/****************************/
+
+#testimonials blockquote i {
+  color: #5daed5;
+}
+
+
+
+/*****************************/
+/****** Social Networks ******/
+/*****************************/
+
+#social-widget-footer a:hover,
+#social-widget-header a:hover {
+  color: #5daed5;
+}
+
+
+
+/*******************************/
+/********* Login block *********/
+/*******************************/
+
+/* modal user login */
+#myLoginModal a {
+  color: #5daed5;
+}
+
+
+
+
+
+
+/********************************************************************************/
+/********************************************************************************/
+/******************************** Theme Features ********************************/
+/********************************************************************************/
+/********************************************************************************/
+
+/*****************************/
+/********* Carousels *********/
+/*****************************/
+
+.carousel-arrows .carousel-arrow-left:hover,
+.carousel-arrows .carousel-arrow-right:hover {
+  color: #5daed5;
+}
+
+
+
+/*****************************/
+/********** Buttons **********/
+/*****************************/
+
+.btn-primary {
+  background-color: #5daed5;
+  *background-color: #5daed5;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  background-color: #6dbee5;
+  *background-color: #6dbee5;
+}
+
+.btn-link {
+  color: #5daed5;
+}
+
+
+
+/**************************/
+/********** Tabs **********/
+/**************************/
+
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+  border-top: 1px solid #5daed5;
+}
+
+/* Left Tabs */
+.tabs-left > .nav-tabs > .active > a,
+.tabs-left > .nav-tabs > .active > a:hover,
+.tabs-left > .nav-tabs > .active > a:focus {
+  border-left: 1px solid #5daed5;
+}
+
+/* Right Tabs */
+.tabs-right > .nav-tabs > .active > a,
+.tabs-right > .nav-tabs > .active > a:hover,
+.tabs-right > .nav-tabs > .active > a:focus {
+  border-right: 1px solid #5daed5;
+}
+
+/* Below Tabs */
+.tabs-below > .nav-tabs > .active > a,
+.tabs-below > .nav-tabs > .active > a:hover,
+.tabs-below > .nav-tabs > .active > a:focus {
+  border-bottom: 1px solid #5daed5;
+}
+
+
+
+/**************************************/
+/*****   Labels, Badges, Alerts   *****/
+/***** Progress Bars, Wells, Hero *****/
+/**************************************/
+
+.progress .bar {
+  background-color: #5daed5;
+}
+
+.progress-striped .bar {
+  background-color: #5daed5;
+}
+
+/* Wells */
+.well blockquote {
+  border-color: #5daed5;
+}
+
+.well blockquote.pull-right {
+  border-color: #5daed5;
+}
+
+
+
+/**********************************/
+/***********  Our Team  ***********/
+/**********************************/
+
+.team-social a:hover {
+  color: #5daed5;
+}
+
+
+
+
+
+
+/*********************************************************************************/
+/*********************************************************************************/
+/******************************** Settings styles ********************************/
+/*********************************************************************************/
+/*********************************************************************************/
+
+/* Background colors */
+
+.bg-color-theme { background-color: #5daed5; }
+
+/* Text colors */
+
+.text-color-theme { color: #5daed5; }
+
+
+
+
+
+
+@media (max-width: 979px) {
+  
+  /**********************************************************************************/
+  /**********************************************************************************/
+  /************************************** Menu **************************************/
+  /**********************************************************************************/
+  /**********************************************************************************/
+
+  /*************************************/
+  /********** Main navigation **********/
+  /*************************************/
+  
+  .navbar .brand {
+    border-bottom: 2px solid #5daed5;
+  }
+  
+  /* Dropdown menu */
+  .nav-collapse .nav > li:focus > a,
+  .nav-collapse .nav > li:hover > a,
+  .nav-collapse .nav > li > a:hover,
+  .nav-collapse .nav > li > a:focus,
+  .nav-collapse .dropdown-menu a:hover,
+  .nav-collapse .dropdown-menu a:focus {
+    color: #5daed5;
+  }
+  
+  .navbar .nav > .active > a,
+  .navbar .nav > .active > a:hover,
+  .navbar .nav > .active > a:focus {
+    color: #5daed5;
+  }
+
+
+
+}

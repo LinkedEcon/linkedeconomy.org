@@ -1,0 +1,144 @@
+<?php
+
+/**
+ * @file Test protected node behavior with private files.
+ */
+
+/**
+ * Configure protected_node to use per node password and use private file field.
+ */
+class ProtectedNodePrivateFile extends ProtectedNodeBaseTestCase {
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Protected node private file',
+      'description' => "This tests the behavior of protected node with private file field",
+      'group' => 'Protected Node',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp();
+
+    // Log in an Admin.
+    $this->drupalLogin($this->adminUser);
+    // Submit the configuration form.
+    $protected_node_settings = array(
+      'protected_node_use_global_password' => PROTECTED_NODE_PER_NODE_PASSWORD,
+    );
+    $this->drupalPost('admin/config/content/protected_node', $protected_node_settings, t('Save configuration'));
+
+    // Private file system already set by simpletest.
+
+    // Set private file field for basic page.
+    $filefieldtestcase = new FileFieldTestCase();
+    $filefieldtestcase->createFileField('private_file', 'page', array(
+      'uri_scheme' => 'private',
+    ));
+
+    // Get a file to upload.
+    $this->text_file = current($this->drupalGetTestFiles('text'));
+  }
+
+  /**
+   * Test that a file on a node protected with per node protection can be
+   * downloaded with the right password.
+   */
+  public function testAllowedView() {
+    // Log in as Admin.
+    $this->drupalLogin($this->adminUser);
+    // Generate random password.
+    $password = $this->randomName(10);
+    // Create a new page node.
+    $node = $this->createProtectedNode($password);
+    // Once the node created logout the User.
+    $this->drupalLogout();
+
+    // An authenticated user sees the node.
+    $this->drupalLogin($this->normalAccessAllowedUser);
+    $form = array('password' => $password);
+    $this->drupalPost('node/' . $node->nid, $form, t('OK'));
+
+    // Ensure the file can be downloaded.
+    $this->drupalGet(file_create_url($node->private_file['und'][0]['uri']));
+    $this->assertResponse(200, 'Confirmed that the generated URL is correct by downloading the shipped file.');
+  }
+
+  /**
+   * Test that a file on a node protected with per node protection can't be
+   * downloaded with the wrong password.
+   */
+  public function testAllowedViewWrongPassword() {
+    // Log in as Admin.
+    $this->drupalLogin($this->adminUser);
+    // Generate random password.
+    $password = $this->randomName(10);
+    // Create a new page node.
+    $node = $this->createProtectedNode($password);
+    // Once the node created logout the User.
+    $this->drupalLogout();
+
+    // An authenticated user sees the node.
+    $this->drupalLogin($this->normalAccessAllowedUser);
+    $another_password = $this->randomName(12);
+    $form = array('password' => $another_password);
+    $this->drupalPost('node/' . $node->nid, $form, t('OK'));
+
+    // Ensure the file cannot be downloaded.
+    $file_uri = $node->private_file['und'][0]['uri'];
+    $file_url = file_create_url($file_uri);
+    $file_text = file_get_contents(drupal_realpath($file_uri));
+    $this->drupalGet($file_url);
+    $this->assertNoText($file_text, 'Confirmed that access is denied for the file without access to the node.', $this->group);
+  }
+
+  /**
+   * Test that a file on a node protected with per node protection can't be
+   * downloaded by an authenticated but not allowed user.
+   */
+  public function testAuthenticatedNonAllowedView() {
+    // Log in as Admin.
+    $this->drupalLogin($this->adminUser);
+    // Generate random password.
+    $password = $this->randomName(10);
+    // Create a new page node.
+    $node = $this->createProtectedNode($password);
+    // Once the node created logout the User.
+    $this->drupalLogout();
+
+    // Ensure the file cannot be downloaded.
+    $this->drupalLogin($this->normalNonAccessAllowedUser);
+    $this->drupalGet(file_create_url($node->private_file['und'][0]['uri']));
+    $this->assertResponse(403, 'Confirmed that access is denied for the file without access to the node.');
+  }
+
+  /**
+   * Helper method to create a protected node.
+   *
+   * Please make sure the user has the permission to create the node before
+   * calling the method.
+   * @argument password.
+   * @return node object.
+   */
+  public function createProtectedNode($password) {
+    // Add a new page node that is protected.
+    $node_title = $this->randomName(8);
+    $node_data = array(
+      'title' => $node_title,
+      'files[private_file_und_0]' => drupal_realpath($this->text_file->uri),
+      'protected_node_is_protected' => TRUE,
+      'protected_node_passwd[pass1]' => $password,
+      'protected_node_passwd[pass2]' => $password,
+    );
+    $this->drupalPost('node/add/page', $node_data, t('Save'));
+
+    return $this->drupalGetNodeByTitle($node_title);
+  }
+
+}

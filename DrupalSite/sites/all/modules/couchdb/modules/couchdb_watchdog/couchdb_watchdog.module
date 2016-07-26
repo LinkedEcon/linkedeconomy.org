@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * CouchDB watchdog module
+ * 
+ * Copyright (c) 2010-2011 DOCOMO Communications Laboratories USA, Inc. 
+ * 
+ */
+
+define ('COUCHDB_WATCHDOG_PER_PAGE', 50);
+define ('COUCHDB_WATCHDOG_DB', 'drupal_watchdog');
+
+/**
+ * Implements hook_menu().
+ */
+function couchdb_watchdog_menu() {
+  $items['admin/reports/couchdb-watchdog'] = array(
+    'title' => 'Recent CouchDB log entriesB',
+    'description' => 'View events that have been logged in CouchDB',
+    'page callback' => 'couchdb_watchdog_list',
+    'access arguments' => array('access site reports'),
+    'file' => 'couchdb_watchdog.admin.inc',
+  );
+  
+  $items['admin/reports/couchdb-watchdog/%'] = array(
+    'title' => 'CouchDB Log Details',
+    'page callback' => 'couchdb_watchdog_detail',
+    'page arguments' => array(3),
+    'access arguments' => array('access site reports'),
+    'type' => MENU_CALLBACK,
+    'file' => 'couchdb_watchdog.admin.inc',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_watchdog().
+ */
+function couchdb_watchdog_watchdog(array $log_entry) {
+  // massage the user
+  $account = $log_entry['user'];
+  unset($log_entry['user']);
+  $log_entry['user'] = array('name' => isset($account->name) ? $account->name : variable_get('anonymous', t('Anonymous')), 'uid' => $account->uid);
+  
+  try {
+    $couch = new CouchDB();
+    // Get a unique id from couch
+    $uuids = $couch->getUUIDS();
+    $database = $couch->getDatabase(COUCHDB_WATCHDOG_DB);
+    $database->storeDocument($uuids->uuids[0], $log_entry);
+  }
+  catch (Exception $e) {
+    drupal_set_message(check_plain('Error occured while connecting to CouchDB ' . $e), 'error');
+  }
+}

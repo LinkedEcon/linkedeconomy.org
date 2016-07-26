@@ -1,0 +1,16 @@
+input.achievement-openbadges-backpack-button {
+  background-color: transparent;
+  background-image: url('images/moz_backpack.png');
+  background-position: 0 2px;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  height: 75px;
+  margin-left: 30px;
+  margin-top: 0px;
+  opacity: .5;
+  width: 130px;
+}
+input.achievement-openbadges-backpack-button:hover {
+  opacity: 1;
+}

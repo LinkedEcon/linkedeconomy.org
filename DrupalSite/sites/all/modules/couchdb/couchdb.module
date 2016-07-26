@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file
+ * Integrate Drupal and CouchDB.
+ * 
+ * Copyright (c) 2010-2011 DOCOMO Communications Laboratories USA, Inc. 
+ * 
+ */
+
+

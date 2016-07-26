@@ -1,0 +1,12 @@
+18CE449B1DCD82C69866DD005B18B6FB
+mathisis.edu.gr
+
+
+
+
+badges
+
+http://api.steampowered.com/IPlayerService/GetBadges/v1/?key=18CE449B1DCD82C69866DD005B18B6FB&steamid=76561198008395362
+
+
+empty   76561198161268212

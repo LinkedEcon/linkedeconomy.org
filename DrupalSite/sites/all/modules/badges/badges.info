@@ -1,0 +1,4 @@
+name = Badges
+description = "The Badges for lmbs.eu"
+dependencies[] = achievements
+core = 7.x

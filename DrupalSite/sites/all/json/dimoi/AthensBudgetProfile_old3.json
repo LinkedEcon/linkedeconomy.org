@@ -1,0 +1,414 @@
+[
+    {
+        "info_CityOFAthens": {
+            "Info": "wikipedia.org",
+            "Area": "412τ.χλμ",
+            "Population": "3.089.698",
+            "Mayor": "Γιώργος Καμίνης",
+            "Website": "cityofathens.gr",
+            "Abstract": "Η Αθήνα (Ἀθῆναι στα αρχαία ελληνικά και την καθαρεύουσα) είναι η πρωτεύουσα της Ελλάδας. Επίσης είναι η έδρα της Περιφέρειας Αττικής. Βρίσκεται στη Στερεά (Κεντρική) Ελλάδα και αποτελεί εύρωστο οικονομικό, πολιτιστικό και διοικητικό κέντρο της χώρας. Πήρε το όνομά της από τη θεά Αθηνά που ήταν και η προστάτιδά της. Η Αθήνα σήμερα είναι μία σύγχρονη πόλη αλλά και διάσημη, καθώς στην αρχαιότητα ήταν πανίσχυρη πόλη-κράτος και σημαντικότατο κέντρο πολιτισμού· θεωρείται η ιστορικότερη πόλη της Ευρώπης μαζί με τη Ρώμη. Είναι γνωστή σε όλο τον κόσμο για τα ιστορικά της μνημεία που διασώθηκαν,έστω και μερικώς, στο πέρασμα των αιώνων. Επίνειο της ιστορικής πόλης είναι το λιμάνι του Πειραιά. Στην Αρχαία Ελλάδα η Αθήνα αναφερόταν στον πληθυντικό: «Ἀθῆναι»· τον 19ο αιώνα το όνομα αυτό επανήλθε ως το επίσημο όνομα της πόλης. Στη δεκαετία του 1970 με την εγκατάλειψη της καθαρεύουσας το όνομα «Αθήνα» καθιερώθηκε ως το επίσημο. Εντούτοις, συχνή παραμένει η χρήση της γενικής πληθυντικού «Αθηνών», ιδίως στον γραπτό ή επίσημο λόγο. Το πολεοδομικό συγκρότημα καταλαμβάνει έκταση 412.000 στρεμμάτων καλύπτοντας το λεκανοπέδιο που περιβάλλεται από τα όρη Αιγάλεω, Πάρνηθα, Πεντέλη και Υμηττό. Ο συνολικός πληθυσμός αποτελεί σχεδόν το 1/3 του συνολικού πληθυσμού της Ελλάδας και ανέρχεται, σύμφωνα με την απογραφή του 2011, σε 3.074.160. Έτσι, σε κάθε χμ αντιστοιχούν 7.462 κάτοικοι. Το υψόμετρο στο κέντρο της πόλης υπολογίζεται σε 20 μέτρα από τη στάθμη της θάλασσας, ενώ η μορφολογία του λεκανοπεδίου είναι σχετικά πολύμορφη, με λοφίσκους και ορεινούς όγκους. Η ανεξέλεγκτη δόμηση έχει οδηγήσει στην καταστροφή όλων σχεδόν των ποταμών του λεκανοπεδίου Αττικής, οι οποίοι είτε εξαφανίστηκαν, είτε ρυπάνθηκαν ανεπανόρθωτα. Επιπλέον, αυτή είναι η αιτία μεγάλων πλημμυρών που πλήττουν την πόλη κατά τις πολύ βροχερές μέρες. Πρόκειται για μια αρκετά αστικοποιημένη πόλη, αρκετά ακριβή (βρίσκεται σταθερά στις πρώτες δέκα θέσεις των πιο ακριβών πόλεων της Ευρωζώνης), με όμορφα μικρά πάρκα αλλά και πευκόφυτα δάση στα γύρω βουνά, τα οποία καίγονται συστηματικά κατά τους θερινούς μήνες. Τα τελευταία χρόνια έχουν γίνει πολλά έργα αναστροφής των προβλημάτων που αντιμετωπίζει, ενώ η μητροπολιτική φιλοσοφία ανάπτυξης φαίνεται να ακολουθεί την αναπτυξιακή πορεία των λοιπών γνωστών μεγαλουπόλεων παγκοσμίως. Ωστόσο, χαρακτηριστική παραμένει η έλλειψη ουρανοξυστών, ποδηλατόδρομων,πεζόδρομων και μεγάλων πάρκων. "
+        },
+        "amounts": {
+            "income_Till_Now": "€0.6B",
+            "income_Last_Month": "0.5B",
+            "percentage_Change_Income": "-10.55%",
+            "expenses_Till_Now": "€0.5B",
+            "expenses_Last_Month": "€0.5B",
+            "percentage_Change_Expenses": "-8.15%"
+        },
+        "expense_Months_Current_Year": {
+            "January": "€0.5M",
+            "February": "€45.5M",
+            "March": "€84.2M",
+            "April": "€0.1B",
+            "May": "€0.2B",
+            "June": "€0.2B",
+            "July": "€0.2B",
+            "August": "€0.2B",
+            "September": "€0.0K",
+            "October": "€0.0K",
+            "November": "€0.0K",
+            "December": "€0.0K"
+        },
+        "income_Months_Current_Year": {
+            "January": "€33.4M",
+            "February": "€60.5M",
+            "March": "€0.1B",
+            "April": "€0.1B",
+            "May": "€0.2B",
+            "June": "€0.2B",
+            "July": "€0.3B",
+            "August": "€0.3B",
+            "September": "€0.0K",
+            "October": "€0.0K",
+            "November": "€0.0K",
+            "December": "€0.0K"
+        },
+        "diafora_Months_Current_Year": {
+            "january": "€32948718",
+            "february": "€14989064",
+            "march": "€37597984",
+            "april": "€28287392",
+            "may": "€28446832",
+            "june": "€27687360",
+            "july": "€28955424",
+            "august": "€39064800",
+            "september": "€0",
+            "october": "€0",
+            "november": "€0",
+            "december": "€0"
+        },
+        "pososta_Current_Year": {
+            "pososto_Epixorogiseis": "0.31%",
+            "pososto_Antapodotika": "34.4%",
+            "pososto_Yper_Dimosiou": "23.77%",
+            "pososto_Inc_Foroi": "10.1%",
+            "pososto_Periousia": "2.81%",
+            "pososto_Inc_Loipa": "28.62%",
+            "pososto_Amoives": "31.53%",
+            "pososto_Paroxes": "37.96%",
+            "pososto_ForoiTeli": "0.05%",
+            "pososto_Daneia": "3.84%",
+            "pososto_Ependiseis": "2.3%",
+            "pososto_Exp_Loipa": "24.32%"
+        },
+        "income_Table": [
+            {
+                "year": "2014",
+                "income_Periousia": "€1.0M",
+                "income_Epixorigiseis": "€0.1B",
+                "income_Antapodotika": "€80.7M",
+                "income_Yper_Dimosiou": "€34.3M",
+                "income_Foroi": "€10.0M",
+                "income_Loipa": "€97.1M"
+            },
+            {
+                "year": "2013",
+                "income_Periousia": "€3.0M",
+                "income_Epixorigiseis": "€0.2B",
+                "income_Antapodotika": "€0.1B",
+                "income_Yper_Dimosiou": "€60.4M",
+                "income_Foroi": "€17.3M",
+                "income_Loipa": "€0.4B"
+            }
+        ],
+        "expenses_Table": [
+            {
+                "year": "2014",
+                "expenses_Paroxes": "€92.7M",
+                "expenses_Amoives": "€77.0M",
+                "expenses_Ependiseis": "€6.0M",
+                "expenses_Foroi_KAI_Teli": "€0.1M",
+                "expenses_Daneia": "€9.0M",
+                "expenses_Loipa": "€59.4M"
+            },
+            {
+                "year": "2013",
+                "expenses_Paroxes": "€0.2B",
+                "expenses_Amoives": "€0.1B",
+                "expenses_Ependiseis": "€31.6M",
+                "expenses_Foroi_KAI_Teli": "€0.4M",
+                "expenses_Daneia": "€22.3M",
+                "expenses_Loipa": "€0.4B"
+            }
+        ],
+        "incomeIndicators": [
+            {
+                "year": "2014",
+                "income_Periousia": "€1.0M",
+                "income_Epixorigiseis": "€0.1B",
+                "income_Antapodotika": "€80.7M",
+                "income_Yper_Dimosiou": "€34.3M",
+                "income_TeliKathariotitas": "€80.4M",
+                "income_Foroi": "€10.0M",
+                "sinolo_Daneion": "€0.0K",
+                "income_Loipa": "€97.1M"
+            },
+            {
+                "year": "2013",
+                "income_Periousia": "€3.0M",
+                "income_Epixorigiseis": "€0.2B",
+                "income_Antapodotika": "€0.1B",
+                "income_Yper_Dimosiou": "€60.4M",
+                "income_TeliKathariotitas": "€0.1B",
+                "income_Foroi": "€17.3M",
+                "sinolo_Daneion": "€0.0K",
+                "income_Loipa": "€0.4B"
+            }
+        ],
+        "expenseIndicators": [
+            {
+                "year": "2014",
+                "expenses_Paroxes": "€92.7M",
+                "expenses_Amoives": "€77.0M",
+                "expenses_Ependiseis": "€6.0M",
+                "expenses_Foroi_KAI_Teli": "€0.1M",
+                "expenses_Daneia": "€9.0M",
+                "expenses_Loipa": "€59.4M"
+            },
+            {
+                "year": "2013",
+                "expenses_Paroxes": "€0.2B",
+                "expenses_Amoives": "€0.1B",
+                "Expenses_Ependiseis": "€31.6M",
+                "expenses_Foroi_KAI_Teli": "€0.4M",
+                "expenses_Daneia": "€22.3M",
+                "expenses_Loipa": "€0.4B"
+            }
+        ],
+        "basicStatsIndicators": [
+            {
+                "year": "2014",
+                "income_Taktika": "€0.2B",
+                "income_Taktika_2": "€0.2B",
+                "income_Ektakta": "€28.7M",
+                "income_Ektakta_2": "€20.9M",
+                "income_POE_Protovevaiomena": "€26.3M",
+                "income_Idia_Esoda": "€0.2B",
+                "income_Synolika_Esoda": "€0.3B",
+                "eispraktea_Ypoloipa_POE": "€8.0M",
+                "xrimatikoYpoloipo": "€22.7M",
+                "esodaApoEksoterikesPiges": "€0.1B",
+                "epixorigiseis_Daneia_Ependiseis": "€8.0M",
+                "expense_Synolika_Eksoda": "€0.3B",
+                "eksoda_Xrisis": "€0.2B",
+                "eksoda_Prosopikou": "€73.2M",
+                "kostos_Sinolikis_Apasxolisis": "€95.6M",
+                "ependitikes_Dapanes_Tokoxreolisia": "€18.1M",
+                "proairetikes_Epixorigiseis": "€84.8K",
+                "expense_Sinolo_Ependiseon": "€9.0M",
+                "ofeilesPOE": "€21.3M",
+                "provlepseis": "€0.0K",
+                "apothematiko": "€0.0K",
+                "expense_Ypoxreoseis_POE": "€55.7M",
+                "eisprakseis_gia_epixorigiseis_gia_erga": "€0.1B",
+                "taktikes_Epixorigiseis": "€0.1B",
+                "ektaktes_Epixorigiseis": "€15.1M",
+                "expense_BudgetItems": "€0.8B",
+                "expense_CommittedItems": "€0.2B",
+                "expense_ExpenseApprovalItems": "€0.5B",
+                "expense_Expense_Spending_Items": "€0.3B",
+                "income_BudgetItems": "€0.8B",
+                "income_ExpenseApprovalItems": "€0.6B",
+                "income_Spending_Items": "€0.3B"
+            },
+            {
+                "year": "2013",
+                "income_Taktika": "€0.5B",
+                "income_Taktika_2": "€0.3B",
+                "income_Ektakta": "€0.3B",
+                "income_Ektakta_2": "€45.4M",
+                "income_POE_Protovevaiomena": "€36.3M",
+                "income_Idia_Esoda": "€0.5B",
+                "income_Synolika_Esoda": "€0.8B",
+                "eispraktea_Ypoloipa_POE": "€0.3B",
+                "xrimatikoYpoloipo": "€32.2M",
+                "esodaApoEksoterikesPiges": "€0.2B",
+                "epixorigiseis_Daneia_Ependiseis": "€20.1M",
+                "expense_Synolika_Eksoda": "€0.5B",
+                "eksoda_Xrisis": "€0.4B",
+                "eksoda_Prosopikou": "€0.1B",
+                "kostos_Sinolikis_Apasxolisis": "€0.2B",
+                "ependitikes_Dapanes_Tokoxreolisia": "€66.5M",
+                "proairetikes_Epixorigiseis": "€0.4M",
+                "expense_Sinolo_Ependiseon": "€44.4M",
+                "ofeilesPOE": "€26.9M",
+                "provlepseis": "€0.3B",
+                "apothematiko": "€2.0M",
+                "expense_Ypoxreoseis_POE": "€88.1M",
+                "eisprakseis_gia_epixorigiseis_gia_erga": "€0.2B",
+                "taktikes_Epixorigiseis": "€0.2B",
+                "ektaktes_Epixorigiseis": "€31.7M",
+                "expense_BudgetItems": "€0.8B",
+                "expense_CommittedItems": "€0.0K",
+                "expense_ExpenseApprovalItems": "€0.0K",
+                "expense_Expense_Spending_Items": "€0.0K",
+                "income_BudgetItems": "€0.8B",
+                "income_ExpenseApprovalItems": "€0.3B",
+                "income_Spending_Items": "€0.0K"
+            }
+        ],
+        "deiktesDomisEsodonEksodon": [
+            {
+                "year": "2014",
+                "deiktisAutonomiasTaktika": "62.86%",
+                "deiktisAutonomiasTaktikaKataFisi": "79.13%",
+                "deiktisAstatheias": "6.92%",
+                "deiktisAstatheiasKataFisi": "9.51%",
+                "protovevaiomenaPOEProsSinolikaEsoda": "8.72%",
+                "sinolikaDaneiaProsSinolikaEsoda": "0%",
+                "deiktisApaitiseon": "2.64%",
+                "xrimatikoYpoloipoProsSinolikaEsoda": "7.51%",
+                "deiktisAneksartisias": "79.79%",
+                "antapodotikaProsSinolikaEsoda": "79.13%",
+                "esodaApoEksoterikesPigesProsSinolikaEsoda": "0%",
+                "deiktisEksartisis": "38.67%",
+                "deiktisLeitourgikonDapanon": "74.78%",
+                "deiktisEpenditikisProspatheias": "0.03%",
+                "deiktisYpoxreoseon": "0.08%",
+                "deiktisEisprakseonEpixorigiseonGiaErgaProsSinolikesEpixorigiseis": "0.07%",
+                "deiktisLeitourgikonEpixorigiseonProsSinolikesEpixorogiseis": "0.93%",
+                "deiktisTaktikonEpixorigiseonProsSinolikesEpixorogiseis": "0.87%",
+                "deiktisEktaktonEpixorigiseonProsSinolikesEpixorogiseis": "0.13%"
+            },
+            {
+                "year": "2013",
+                "deiktisAutonomiasTaktika": "40.92%",
+                "deiktisAutonomiasTaktikaKataFisi": "58.67%",
+                "deiktisAstatheias": "5.87%",
+                "deiktisAstatheiasKataFisi": "33.52%",
+                "protovevaiomenaPOEProsSinolikaEsoda": "4.69%",
+                "sinolikaDaneiaProsSinolikaEsoda": "0%",
+                "deiktisApaitiseon": "36.55%",
+                "xrimatikoYpoloipoProsSinolikaEsoda": "4.16%",
+                "deiktisAneksartisias": "61.36%",
+                "antapodotikaProsSinolikaEsoda": "58.67%",
+                "esodaApoEksoterikesPigesProsSinolikaEsoda": "0%",
+                "deiktisEksartisis": "24%",
+                "deiktisLeitourgikonDapanon": "73.15%",
+                "deiktisEpenditikisProspatheias": "0.09%",
+                "deiktisYpoxreoseon": "0.05%",
+                "deiktisEisprakseonEpixorigiseonGiaErgaProsSinolikesEpixorigiseis": "0.11%",
+                "deiktisLeitourgikonEpixorigiseonProsSinolikesEpixorogiseis": "0.89%",
+                "deiktisTaktikonEpixorigiseonProsSinolikesEpixorogiseis": "0.83%",
+                "deiktisEktaktonEpixorigiseonProsSinolikesEpixorogiseis": "0.17%"
+            }
+        ],
+        "deiktesOikonomikisEpidosis": [
+            {
+                "year": "2014",
+                "deiktisYlopoihsisProypologismou1": "78.43%",
+                "deiktisYlopoihsisProypologismou2": "62.03%",
+                "deiktisYlopoihsisProypologismou3": "50.23%",
+                "deiktisApotelesmatikotitas1": "49.77%",
+                "deiktisApotelesmatikotitas2": "50.23%"
+            },
+            {
+                "year": "2013",
+                "deiktisYlopoihsisProypologismou1": "40.56%",
+                "deiktisYlopoihsisProypologismou2": "0%",
+                "deiktisYlopoihsisProypologismou3": "100%",
+                "deiktisApotelesmatikotitas1": "0%",
+                "deiktisApotelesmatikotitas2": "100%"
+            }
+        ],
+        "deiktesAnthropinonPoron": [
+            {
+                "year": "2014",
+                "deiktisKalipsisLeitourgikouKostous": "79.94%",
+                "deiktisYpoxreoseonParelthontonOikonomikonEton": "21.83%",
+                "deiktisKostousAnthropinouDinamikou": "28.65%",
+                "deiktisKostousProsopikouProsEksodaXrisis": "38.32%",
+                "deiktisKostousSinolikisApasxolisisProsSinolikaEksoda": "37.42%",
+                "deiktisApodosisProsopikou": "5323.67%",
+                "deiktisMesouKostousProsopikou": "1525.29%",
+                "deiktisKalipsisKostousProsopikou": "30.63%"
+            },
+            {
+                "year": "2013",
+                "deiktisKalipsisLeitourgikouKostous": "79.54%",
+                "deiktisYpoxreoseonParelthontonOikonomikonEton": "17.85%",
+                "deiktisKostousAnthropinouDinamikou": "24.29%",
+                "deiktisKostousProsopikouProsEksodaXrisis": "33.21%",
+                "deiktisKostousSinolikisApasxolisisProsSinolikaEksoda": "32.38%",
+                "deiktisApodosisProsopikou": "10284.14%",
+                "deiktisMesouKostousProsopikou": "2498.39%",
+                "deiktisKalipsisKostousProsopikou": "26.42%"
+            }
+        ],
+        "deiktesAnaKatoiko": [
+            {
+                "year": "2014",
+                "deiktisEsodonAnaKatoiko": "97.71",
+                "deiktisTaktikonEsodonAnaKatoiko": "77.32",
+                "deiktisEksodonAnaKatoiko": "82.66",
+                "deiktisForoiKaiTeliAnaKatoiko": "0.04",
+                "deiktisAntapodotikaAnaKatoiko": "26.11",
+                "deiktisEpixorigiseisAnaKatoiko": "37.79",
+                "deiktisEpendiseisAnaKatoiko": "2.81",
+                "deiktisLeitourgikaEksodaAnaKatoiko": "61.81",
+                "deiktisIdiaEsodaAnaKatoiko": "77.96",
+                "deiktisEktaktaEsodaAnaKatoiko": "9.3",
+                "deiktisTeliKathariotitasAnaKatoiko": "26.03",
+                "deiktisEksodaXrisisAnaKatoiko": "61.81"
+            },
+            {
+                "year": "2013",
+                "deiktisEsodonAnaKatoiko": "250.3",
+                "deiktisTaktikonEsodonAnaKatoiko": "146.85",
+                "deiktisEksodonAnaKatoiko": "159.69",
+                "deiktisForoiKaiTeliAnaKatoiko": "0.14",
+                "deiktisAntapodotikaAnaKatoiko": "47.2",
+                "deiktisEpixorigiseisAnaKatoiko": "60.06",
+                "deiktisEpendiseisAnaKatoiko": "14.38",
+                "deiktisLeitourgikaEksodaAnaKatoiko": "116.81",
+                "deiktisIdiaEsodaAnaKatoiko": "153.59",
+                "deiktisEktaktaEsodaAnaKatoiko": "83.91",
+                "deiktisTeliKathariotitasAnaKatoiko": "46.21",
+                "deiktisEksodaXrisisAnaKatoiko": "116.81"
+            }
+        ],
+        "deiktesSisxetisis": [
+            {
+                "year": "2014",
+                "deiktisSinoloEpixorigiseonProsSynolikaEksoda": "0.46%",
+                "deiktisKalipsisLeitoyrgikoyKostous": "0.8%",
+                "deiktisKalipsisKostousMisthodosias": "0.39%",
+                "deiktisKAPprosLeitourgikesDapanes": "0.53%",
+                "deiktisAutoxrimatodotisisEpendiseon": "0.42%",
+                "deiktisProairetikonEpixorigiseon": "0%",
+                "deiktisApothematikou": "0%",
+                "deiktisEsodaProsEksoda": "1.18%",
+                "deiktisApopliromisDaneiakonYpoxreoseon": "0.04%"
+            },
+            {
+                "year": "2013",
+                "deiktisSinoloEpixorigiseonProsSynolikaEksoda": "0.38%",
+                "deiktisKalipsisLeitoyrgikoyKostous": "0.8%",
+                "deiktisKalipsisKostousMisthodosias": "0.38%",
+                "deiktisKAPprosLeitourgikesDapanes": "0.43%",
+                "deiktisAutoxrimatodotisisEpendiseon": "0.3%",
+                "deiktisProairetikonEpixorigiseon": "0%",
+                "deiktisApothematikou": "0.01%",
+                "deiktisEsodaProsEksoda": "1.57%",
+                "deiktisApopliromisDaneiakonYpoxreoseon": "0.05%"
+            }
+        ],
+        "deiktestonProsApodosiEsodon": [
+            {
+                "year": "2014",
+                "deiktisSinoloEpixorigiseonProsSynolikaEksoda": "0.46%",
+                "deiktisKalipsisLeitoyrgikoyKostous": "0.8%",
+                "deiktisKalipsisKostousMisthodosias": "0.39%",
+                "deiktisKAPprosLeitourgikesDapanes": "0.53%",
+                "deiktisAutoxrimatodotisisEpendiseon": "0.42%",
+                "deiktisProairetikonEpixorigiseon": "0%",
+                "deiktisApothematikou": "0%",
+                "deiktisEsodaProsEksoda": "1.18%",
+                "deiktisApopliromisDaneiakonYpoxreoseon": "0.04%"
+            },
+            {
+                "year": "2013",
+                "deiktisLoipesApodoseis": "0%",
+                "deiktisSintaksiodotikesEisfores": "0%",
+                "deiktisForoikaiLoipesEpivarinseis": "0%",
+                "deiktisAsfalistikesEisfores": "0%",
+                "deiktisLoipesKratiseisYperTriton": "0%",
+                "deiktisPagiaProkatavoli": "0%"
+            }
+        ],
+        "posostaFromArithmodeiktes": {
+            "posostoDeiktisYlopoiishs": "2.54%",
+            "posostoDeiktisAutonomias": "2.89%",
+            "posostoDeiktisApodosisProsopikou": "-48.58%",
+            "posostoDeiktisForoiKaiTeliAnaKatoiko": "0"
+        },
+        "about": {
+            "lastUpdate": "2014-12-23",
+            "sources": "<a href=\"www.cityofathens.gr\">Δήμος Αθηναίων</a>",
+            "termOfUse": "<a href=\"http://creativecommons.org/licenses/by/4.0/deed.el\">Ελληνική άδεια Creative Commons Αναφορά Προέλευσης (CC BY v.4.0)</a>",
+            "problemsManagement": "TBA",
+            "contribution": "Για την ανάκτηση δεδομένων από δύσκολες πηγές (χωρίς API ή RSS) το LinkedEconomy συνεργάζεται με την ομάδα του <a href=\"http://deixto.com\">DEiXTo</a>, ενός συστήματος αποδελτίωσης ιστού (web data extraction)."
+        }
+    }
+]

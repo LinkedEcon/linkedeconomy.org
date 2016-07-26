@@ -1,0 +1,394 @@
+<?php
+
+/**
+ * @file
+ * Unit Tests for CouchDB API
+ * 
+ * Copyright (c) 2010-2011 DOCOMO Communications Laboratories USA, Inc.
+ *  
+ */
+
+class CouchDBTestCase extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'CouchDB Unit Tests',
+      'description' => 'Tests the base CouchDB API.',
+      'group' => 'CouchDB',
+    );
+  }
+  
+  protected function setUp() {
+    parent::setUp('couchdb');
+    
+    // initialize a database for testing -- catch exception
+    try {
+      // setup variables
+      $this->init();
+      
+      $couch = new CouchDB();
+      // Lazy setup the test database
+      $result = $couch->databaseInfo('couchdb_simpletest_database');
+      if (isset($result->error) && $result->reason == 'no_db_file') {
+        // Create the database
+        $result = $couch->createDatabase('couchdb_simpletest_database');
+        $this->assertTrue($result->ok, 'couchdb_simpletest_database created');
+      }
+    } 
+    catch (CouchDBException $e) {
+      // Throw error
+      $this->error($e->getMessage());
+    }
+  }
+  
+  private function init() {
+    // setup variables
+    $settings = array(
+      'base_url' => 'http://localhost:5984',
+      'http_auth' => 'admin:admin',
+      'cookie_jar' => '/tmp/couchdb_cookies.txt',
+    );
+    variable_set('couchdb', $settings);
+  }
+  
+  public function testCouchCommands() {
+    $this->init();
+    $couch = new CouchDB();
+    
+    // Test _stats call
+    $result = $couch->getStats();
+    $this->assertEqual($couch->status, '200', '_stats - http code: ' . $couch->status);
+    
+    // Test _all_dbs
+    $result = $couch->listDatabases();
+    $this->assertEqual($couch->status, '200', '_all_dbs - http code: ' . $couch->status);
+    
+    // Test _active_tasks
+    $result = $couch->getActiveTasks();
+    $this->assertEqual($couch->status, '200', '_active_tasks - http code: ' . $couch->status);
+    
+    // Test _uuids
+    $result = $couch->getUUIDS();
+    $this->assertEqual($couch->status, '200', '_uuids - http code: ' . $couch->status);
+    
+  }
+  
+  public function testCouchReplication() {
+    $this->init();
+    $couch = new CouchDB();
+    
+    // create source database
+    $result = $couch->createDatabase('couchdb_simpletest_database_source');
+    $this->assertTrue($result->ok, 'couchdb_simpletest_database_source created');
+    
+    // create destination database
+    $result = $couch->createDatabase('couchdb_simpletest_database_target');
+    $this->assertTrue($result->ok, 'couchdb_simpletest_database_target created');
+    
+    // put a simple document in database one
+    $source_database = $couch->getDatabase('couchdb_simpletest_database_source');
+    $result = $source_database->storeDocument('SimpleTest_1', array('id' => 'simple_test1', 'name' => 'Source Document'));
+    $this->assertEqual($couch->status, '201', 'create simple document on source database - http code: ' . $couch->status);
+    
+    // Start replication
+    $result = $couch->replicateDatabase('couchdb_simpletest_database_source', 'couchdb_simpletest_database_target');
+    $this->assertEqual($couch->status, '200', 'Replication started - http code: ' . $couch->status);
+    
+    // Cancel replication
+    $result = $couch->replicateDatabase('couchdb_simpletest_database_source', 'couchdb_simpletest_database_target', FALSE, TRUE);
+    $this->assertEqual($couch->status, '200', 'Cancel replication - http code: ' . $couch->status);
+    
+    // start continuous replication
+    $result = $couch->replicateDatabase('couchdb_simpletest_database_source', 'couchdb_simpletest_database_target', TRUE);
+    $this->assertEqual($couch->status, '202', 'Continuous replication started - http code: ' . $couch->status);
+    
+    // stop continous replication
+    $result = $couch->replicateDatabase('couchdb_simpletest_database_source', 'couchdb_simpletest_database_target', TRUE, TRUE);
+    $this->assertEqual($couch->status, '200', 'Cancel continuous replication - http code: ' . $couch->status);
+    
+    // delete the source databases
+    $result = $couch->deleteDatabase('couchdb_simpletest_database_source');
+    $this->assertEqual($couch->status, '200', 'Delete source database - http code: ' . $couch->status);
+    
+    // delete the target database
+    $result = $couch->deleteDatabase('couchdb_simpletest_database_target');
+    $this->assertEqual($couch->status, '200', 'Delete target database - http code: ' . $couch->status);
+  }
+  
+  public function testCouchCrud() {
+    $this->init();
+    $couch = new CouchDB();
+    
+    // create new database
+    $result = $couch->createDatabase('couchdb_simpletest_crud_database');
+    $this->assertTrue($result->ok, 'couchdb_simpletest_crud_database created');
+    
+    // info
+    $result = $couch->databaseInfo('couchdb_simpletest_crud_database');
+    $this->assertNotEqual($couch->status, '404', 'couchdb_simpletest_crud_database databaseInfo() - http code: ' . $couch->status);
+
+    // delete database
+    $result = $couch->deleteDatabase('couchdb_simpletest_crud_database');
+    $this->assertEqual($couch->status, '200', 'couchdb_simpletest_crud_database deleted - http code: ' . $couch->status);
+  }
+  
+  public function testCouchDocumentCrud() {
+    $this->init();
+    $couch = new CouchDB();
+    $database = $couch->getDatabase('couchdb_simpletest_database');
+    
+    // Store a document
+    $result = $database->storeDocument('doc_1', array('id' => 'doc_1', 'name' => 'Test Title', 'description' => 'Long Description'));
+    $this->assertEqual($couch->status, '201', 'couchdb_simpletest_database doc_1 stored - http code: ' . $couch->status);
+    
+    // Get document doc_1
+    $result = $database->getDocument('doc_1');
+    $this->assertEqual($couch->status, '200', 'couchdb_simpletest_database doc_1 retrieved - http code: ' . $couch->status);
+    
+    // Update doc_1
+    $result = $database->storeDocument('doc_1', array('id' => 'doc_1', 'name' => 'Test Title', 'description' => 'Long Description is updated', '_rev' => $result->_rev));
+    $this->assertEqual($couch->status, '201', 'couchdb_simpletest_database doc_1 updated - http code: ' . $couch->status);
+    
+    // Get the revisions. There are two revisions created at this point
+    $result = $database->getDocumentRevisions('doc_1');
+    $this->assertEqual(count($result), '2', 'couchdb_simpletest_database doc_1 revision count 2');
+    
+    // Loop the revisions
+    foreach ($result as $rev) {
+      $result = $database->getDocument('doc_1', $rev->rev);
+      $this->assertEqual($couch->status, '200', 'retrieved revision: ' . $rev->rev . ' - http code: ' . $couch->status);
+      $this->assertEqual($result->name, 'Test Title', 'Document titles match');
+    }
+    
+    // Copy Test
+    $result = $database->copyDocument('doc_1', 'doc_2');
+    $this->assertEqual($couch->status, '201', 'doc_1 successfully copied to doc_2 - http code: ' . $couch->status);
+
+    // Retrieve doc_2 and match the titles
+    $result = $database->getDocument('doc_2');
+    $this->assertEqual($couch->status, '200', 'doc_2 retrieved - http code: ' . $couch->status);
+    $this->assertEqual($result->name, 'Test Title', 'Document titles match after copy');
+    
+    // Delete doc_2
+    $result = $database->deleteDocument('doc_2', $result->_rev);
+    $this->assertEqual($couch->status, '200', 'doc_2 deleted successfully - http code: ' . $couch->status);
+    
+    // Get Changes
+    $result = $database->getChanges();
+    $this->assertEqual($couch->status, '200', '_changes feed accessed - http code: ' . $couch->status);
+    
+    // Purge
+    $result = $database->getDocument('doc_1');
+    $purge = array(
+      'doc_1' => array(
+        $result->_rev,
+      ),
+    );
+    $result = $database->purge($purge);
+    $this->assertEqual($couch->status, '200', '_purge - http code: ' . $couch->status);
+    
+    // _bulk_docs - non-atomic
+    $bulk_docs = array(
+      array('id' => 'bulk_1', 'name' => 'bulk_1', 'description' => 'Bulk Document 1'),
+      array('id' => 'bulk_2', 'name' => 'bulk_2', 'description' => 'Bulk Document 2'),
+      array('id' => 'bulk_3', 'name' => 'bulk_3', 'description' => 'Bulk Document 3'),
+    );
+    $result = $database->storeDocuments($bulk_docs);
+    $this->assertEqual($couch->status, '201', '_bulk_docs http code: ' . $couch->status);
+    $this->assertEqual(count($result), '3', '3 documents returned');
+    
+    //make sure each document doesn't have an error
+    foreach ($result as $r) {
+      if (isset($r->error)) {
+        $this->fail('Error encountered for ' . $r->id);
+      }
+    }
+    
+    // _bulk_docs - all or nothing
+    $atomic_bulk_docs = array(
+      array('id' => 'atomic_bulk_1', 'name' => 'atomic_bulk_1', 'description' => 'Bulk Document 1'),
+      array('id' => 'atomic_bulk_2', 'name' => 'atomic_bulk_2', 'description' => 'Bulk Document 2'),
+      array('id' => 'atomic_bulk_3', 'name' => 'atomic_bulk_3', 'description' => 'Bulk Document 3'),
+    );
+    $result = $database->storeDocuments($atomic_bulk_docs, TRUE);
+    $this->assertEqual($couch->status, '201', '_bulk_docs all_or_nothing http code: ' . $couch->status);
+    
+    // _all_docs - POST with $keys()
+    $result = $database->getAllDocuments(array('atomic_bulk_1', 'atomic_bulk_2'));
+    $this->assertEqual(count($result->rows), '2', '_all_docs 2 documents returned');
+    
+    // _all_docs - GET - Should total 6 documents
+    $result = $database->getAllDocuments();
+    $this->assertEqual(count($result->rows), '6', '_all_docs 6 documents returned: ' . count($result->rows));
+    
+    // _all_docs - GET - limit=2
+    $result = $database->getAllDocuments(array(), FALSE, '', '', 4);
+    $this->assertEqual(count($result->rows), '4', '_all_docs 4 documents returned: ' . count($result->rows));
+
+    // execute temp view
+    $temp_view = <<<EOF
+    
+    function (doc) {
+      if (doc.name == 'atomic_bulk_1') {
+        emit(null, doc.name);
+      }
+    }
+         
+EOF;
+    $result = $database->executeTempView($temp_view);
+    $this->assertEqual(count($result->rows), '1', '_temp_view 1 document returned: ' . count($result->rows));
+    
+    // attachments
+    $result = $database->storeDocument('attach_1', array('id' => 'attach_1', 'name' => 'Attachment'));
+    $revision = $result->rev;
+    
+    $result = $database->storeAttachment('attach_1', 'text.txt', 'This is a plain text attachment', 'text/plain', $revision);
+    $this->assertEqual($couch->status, '201', 'Get Attachment http code: ' . $couch->status);
+    $this->assertTrue($result->ok, 'text.txt uploaded');
+    
+    // get attachment
+    $result = $database->getAttachment('attach_1', 'text.txt');
+    $this->assertEqual($couch->status, '200', 'Get attachment http code: ' . $couch->status);
+    $this->assertEqual($result, 'This is a plain text attachment', 'Attachment returned');
+    
+    // delete Attachment
+    $result = $database->getAttachment('attach_1', 'text.txt', $revision);
+    $this->assertEqual($couch->status, '200', 'Attachment deleted http code: ' . $couch->status);
+    
+    // local documents
+    // Store a document
+    $result = $database->storeLocalDocument('local_doc_1', array('id' => 'local_doc_1', 'name' => 'Test Title', 'description' => 'Long Description'));
+    $this->assertEqual($couch->status, '201', 'couchdb_simpletest_database local_doc_1 stored - http code: ' . $couch->status);
+    
+    // Get document doc_1
+    $result = $database->getLocalDocument('local_doc_1');
+    $this->assertEqual($couch->status, '200', 'couchdb_simpletest_database local_doc_1 retrieved - http code: ' . $couch->status);
+    
+    // Update doc_1
+    $result = $database->storeLocalDocument('local_doc_1', array('id' => 'local_doc_1', 'name' => 'Test Title', 'description' => 'Long Description is updated', '_rev' => $result->_rev));
+    $this->assertEqual($couch->status, '201', 'couchdb_simpletest_database local_doc_1 updated - http code: ' . $couch->status);
+    
+    // Copy Test
+    $result = $database->copyLocalDocument('local_doc_1', 'local_doc_2');
+    $this->assertEqual($couch->status, '201', 'local_doc_1 successfully copied to local_doc_2 - http code: ' . $couch->status);
+    
+  }
+  
+  /**
+   * Test global database commands such as compact, view cleanup, 
+   */
+  public function testCouchDocumentCommands() {
+    $this->init();
+    $couch = new CouchDB();
+    $database = $couch->getDatabase('couchdb_simpletest_database');
+    
+    // Compact database
+    $result = $database->compactDatabase();
+    $this->assertEqual($couch->status, '202', '_compact accepted - http code: ' . $couch->status);
+    
+    // View Cleanup
+    $result = $database->viewCleanup();
+    $this->assertEqual($couch->status, '202', '_view_cleanup accepted - http code: ' . $couch->status);
+    $this->assertTrue($result->ok, '_view_cleanup response TRUE');
+    
+    // Ensure Full Commit
+    $result = $database->ensureFullCommit();
+    $this->assertEqual($couch->status, '201', '_ensure_full_commit - http code: ' . $couch->status);
+    $this->assertTrue($result->ok, '_ensure_full_commit response TRUE');
+    
+    // Revs Limit
+    $result = $database->getRevsLimit();
+    $this->assertEqual($couch->status, '200', '_revs_limit - http code: ' . $couch->status);
+    
+    $result = $database->storeRevsLimit(100);
+    $this->assertTrue($result->ok, '_revs_limit set to 100');
+    
+    // Security
+    $result = $database->getSecurity();
+    $this->assertEqual($couch->status, '200', '_security - http code: ' . $couch->status);
+    
+  }
+  
+  public function testDesignDocumentCrud() {
+    $this->init();
+    $couch = new CouchDB();
+    $database = $couch->getDatabase('couchdb_simpletest_database');
+
+    $atomic_bulk_docs = array(
+      array('id' => 'atomic_bulk_1', 'name' => 'atomic_bulk_1', 'description' => 'Bulk Document 1', 'count' => 1),
+      array('id' => 'atomic_bulk_2', 'name' => 'atomic_bulk_2', 'description' => 'Bulk Document 2', 'count' => 2),
+      array('id' => 'atomic_bulk_3', 'name' => 'atomic_bulk_3', 'description' => 'Bulk Document 3', 'count' => 1),
+      array('id' => 'atomic_bulk_4', 'name' => 'atomic_bulk_4', 'description' => 'Bulk Document 4', 'count' => 1),
+      array('id' => 'atomic_bulk_5', 'name' => 'atomic_bulk_5', 'description' => 'Bulk Document 5', 'count' => 1),
+    );
+    $result = $database->storeDocuments($atomic_bulk_docs, TRUE);
+    $this->assertEqual($couch->status, '201', '_bulk_docs all_or_nothing http code: ' . $couch->status);
+    
+    $design_doc = array(
+      '_id' => '_design/couchdb_simpletest_design',
+      'views' => array(
+        'foo' => array(
+          'map' => 'function(doc){ if (doc.count == 1) {emit(doc._id, doc._rev);}}',
+        ),
+      ),
+    );
+    // Store the design document
+    $result = $database->storeDesignDocument('couchdb_simpletest_design', $design_doc);
+    $revision = $result->rev;
+    $this->assertEqual($couch->status, '201', 'Store design document http code: ' . $couch->status);
+    
+    // Get the design document
+    $design_doc = $database->getDesign('couchdb_simpletest_design');
+    $result = $design_doc->getDesignDocument();
+    $this->assertEqual($couch->status, '200', 'Get Design document http code: ' . $couch->status);
+    $this->assertEqual($result->_id, '_design/couchdb_simpletest_design', 'Design Document ids are equal');
+    
+    // getView
+    $result = $design_doc->getView('foo');
+    $this->assertEqual($couch->status, '200', '_getView http code: ' . $couch->status);
+    $this->assertEqual(count($result->rows), '4', 'Executing view foo with results: ' . count($result->rows));
+
+    // Copy
+    $result = $design_doc->copyDesignDocument('couchdb_simpletest_design', 'couchdb_simpletest_design_2', $revision);
+    $this->assertEqual($couch->status, '201', '_copy design document http code: ' . $couch->status);
+    $this->assertEqual($result->id, 'couchdb_simpletest_database/_design/couchdb_simpletest_design_2', 'copied sucessfully :' . $result->id);
+
+    // CRUD Design Attachments
+    // Store an attachment
+    $result = $design_doc->storeDesignAttachment('text.txt', 'This is a plain text attachment', 'text/plain', $revision);
+    $attachment_revision = $result->rev;
+    $this->assertEqual($couch->status, '201', 'Store design attachment http code: ' . $couch->status);
+    $this->assertTrue($result->ok, 'Store design attachment successful');
+    
+    // Get the attachment
+    $result = $design_doc->getDesignAttachment('text.txt');
+    $this->assertEqual($couch->status, '200', 'Get Attachment http code: ' . $couch->status);
+    $this->assertEqual($result, 'This is a plain text attachment', 'Attachment returned successfully');
+    
+    // Delete the attachment
+    $result = $design_doc->deleteDesignAttachment('text.txt', $attachment_revision);
+    $this->assertEqual($couch->status, '200', 'Delete attachment http code: ' . $couch->status);
+    $this->assertTrue($result->ok, 'Attachment deleted successfully');
+    
+    // Delete
+    //get the latest revision
+    $result = $design_doc->getDesignDocument();
+    
+    $result = $design_doc->deleteDesignDocument($result->_rev);
+    $this->assertEqual($couch->status, '200', 'delete design document http code: ' . $couch->status);
+    $this->assertTrue($result->ok, 'Deleted design document successfully');
+    
+
+  }
+  
+  protected function tearDown() {
+    parent::tearDown();
+    $this->init();
+    
+    $couch = new CouchDB();
+    //delete the test database
+    $couch->deleteDatabase('couchdb_simpletest_database');
+    //$this->assertTrue($couch->status, '200', 'Delete simpletest database - http code: ' . $couch->status);
+  }
+  
+}

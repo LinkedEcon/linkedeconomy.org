@@ -1,0 +1,481 @@
+<?php
+
+
+
+/**
+
+ * @file
+
+ * Hooks provided by the Achievements module and how to implement them.
+
+ */
+
+
+
+/**
+
+ * Define an achievement.
+
+ *
+
+ * This hook describes your achievements to the base module so that it can
+
+ * create the pages and caches necessary for site-wide display. The base
+
+ * module doesn't know how to unlock any of your achievements... instead, you
+
+ * use Drupal's existing hooks, the achievement storage tables, and a few
+
+ * helper functions to complete the workflow. See the remaining documentation
+
+ * in this file for further code samples.
+
+ *
+
+ * There are many different kinds of achievements, and it's accurate enough to
+
+ * say that if you can measure or respond to an action, it can be made into a
+
+ * matching achievement. Be creative. Look at what others are doing. Have fun.
+
+ * Your gamification efforts will fail or be un-fun if you don't have a gamer
+
+ * helping you, if you make everything a mindless grind, or if you simply
+
+ * copy achievements from another site or install.
+
+ *
+
+ * @return
+
+ *   An array whose keys are internal achievement IDs (32 chars max) and whose
+
+ *   values identify properties of the achievement. These properties are:
+
+ *   - title: (required) The title of the achievement.
+
+ *   - description: (required) A description of the achievement.
+
+ *   - points: (required) How many points the user will earn when unlocked.
+
+ *   - images: (optional) An array of (optional) keys 'locked', 'unlocked',
+
+ *     and 'secret' whose values are image file paths. Achievements exist in
+
+ *     three separate display states: unlocked (the user has it), locked (the
+
+ *     user doesn't have it), and secret (the user doesn't have it, and the
+
+ *     achievement is a secret). Each state can have its own default image
+
+ *     associated with it (which administrators can configure), or achievements
+
+ *     can specify their own images for one, some, or all states.
+
+ *   - storage: (optional) If you store statistics for your achievement, the
+
+ *     core module assumes you've used the achievement ID for the storage
+
+ *     location. If you haven't, specify the storage location here. This lets
+
+ *     the core module know what to delete when an administrator manually
+
+ *     removes an achievement unlock from a user. If your achievement
+
+ *     tracks statistics that are NOT set with achievements_storage_get()
+
+ *     or _set, you don't have to define the 'storage' key.
+
+ *   - secret: (optional) The achievement displays on a user's Achievements
+
+ *     tab but does not reveal its title, description, or points until the
+
+ *     user has unlocked it. Compatible with 'invisible'.
+
+ *   - invisible: (optional) The achievement does NOT display on a user's
+
+ *     Achievements tab, but does show up on the leaderboards when necessary.
+
+ *     Compatible with 'secret' (i.e., if another user has unlocked an
+
+ *     invisible achievement, a user who has not unlocked it will see the
+
+ *     placeholder secret text instead of the actual achievement itself).
+
+ *
+
+ *   Achievements can also be categorized into groups. Groups are simply
+
+ *   arrays whose keys are internal group IDs and whose values identify
+
+ *   the 'title' of the group as well as the array of 'achievements' that
+
+ *   correspond to that group. If some achievements are within a group and
+
+ *   some achievements are without a group, the groupless achievements will
+
+ *   automatically be placed into a "Miscellany" category.
+
+ */
+
+function badges_achievements_info() {
+
+  $achievements = array(
+
+//  -----------------------    SCOUTER BADGES   -------------------------------   
+
+
+
+      'od-beginner' => array(
+
+            'title'       => t('Scouter Beginner Badge'),
+
+            'description' => t('Passed the Open Data quiz'),
+
+            // 'storage'     => 'comment-count',
+
+            'points'      => 50,
+
+           'images' => array(
+
+                'unlocked'  => 'sites/default/files/badges/icons/bscbeg.png',
+
+                'locked'    => 'sites/default/files/badges/icons/bscbeg.png',
+
+                'badge' =>  'sites/default/files/badges/icons/Badge-sc-beg.png',
+
+
+           ),
+
+    ),
+
+
+  
+  'scouter-bronze' => array(
+
+      'title'       => t('Scouter Bronze Badge'),
+
+      'description' => t('Passed the Scouter(bronze) course'),
+
+     // 'storage'     => 'comment-count',
+
+      'points'      => 100,
+
+      'images' => array(
+
+          'unlocked'  => 'sites/default/files/badges/icons/bscb.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bscb.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-sc-b.png',
+
+           ),
+
+    ),
+
+
+  'scouter-silver' => array(
+
+      'title'       => t('Scouter Silver Badge'),
+
+      'description' => t("Passed the Scouter(silver) course"),
+
+      'points'      => 150,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bscs.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bscs.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-sc-s.png',
+
+	  ),
+
+    ),
+
+
+     'scouter-gold' => array(
+
+      'title'       => t('Scouter Gold Badge'),
+
+      'description' => t("Passed the Scouter(gold) course"),
+
+      'points'      => 200,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bscg.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bscg.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-sc-g.png',
+
+	  ),
+
+    ),
+	
+	 'engineer-bronze' => array(
+
+      'title'       => t('Engineer Bronze Badge'),
+
+      'description' => t('Passed the Engineer(bronze) course'),
+
+     // 'storage'     => 'comment-count',
+
+      'points'      => 100,
+
+      'images' => array(
+
+          'unlocked'  => 'sites/default/files/badges/icons/beb.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/beb.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-e-b.png',
+
+           ),
+
+    ),
+
+
+  'engineer-silver' => array(
+
+      'title'       => t('Engineer Silver Badge'),
+
+      'description' => t("Passed the Engineer(silver) course"),
+
+      'points'      => 150,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bes.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bes.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-e-s.png',
+
+	  ),
+
+    ),
+
+
+     'engineer-gold' => array(
+
+      'title'       => t('Engineer Gold Badge'),
+
+      'description' => t("Passed the Engineer(gold) course"),
+
+      'points'      => 200,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/beg.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/beg.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-e-g.png',
+
+	  ),
+
+    ),
+	
+	 'storyteller-bronze' => array(
+
+      'title'       => t('Storyteller Bronze Badge'),
+
+      'description' => t('Passed the Storyteller(bronze) course'),
+
+     // 'storage'     => 'comment-count',
+
+      'points'      => 100,
+
+      'images' => array(
+
+          'unlocked'  => 'sites/default/files/badges/icons/bstb.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bstb.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-st-b.png',
+
+           ),
+
+    ),
+
+
+  'storyteller-silver' => array(
+
+      'title'       => t('Storyteller Silver Badge'),
+
+      'description' => t("Passed the Storyteller(silver) course"),
+
+      'points'      => 150,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bsts.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bsts.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-st-s.png',
+
+	  ),
+
+    ),
+
+
+     'storyteller-gold' => array(
+
+      'title'       => t('Storyteller Gold Badge'),
+
+      'description' => t("Passed the Storyteller(gold) course"),
+
+      'points'      => 200,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bstg.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bstg.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-st-g.png',
+
+	  ),
+
+    ),
+	
+	 'analyst-bronze' => array(
+
+      'title'       => t('Analyst Bronze Badge'),
+
+      'description' => t('Passed the Analyst(bronze) course'),
+
+     // 'storage'     => 'comment-count',
+
+      'points'      => 100,
+
+      'images' => array(
+
+          'unlocked'  => 'sites/default/files/badges/icons/bab.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bab.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-a-b.png',
+
+           ),
+
+    ),
+
+
+  'analyst-silver' => array(
+
+      'title'       => t('Analyst Silver Badge'),
+
+      'description' => t("Passed the Analyst(silver) course"),
+
+      'points'      => 150,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bas.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bas.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-a-s.png',
+
+	  ),
+
+    ),
+
+
+     'analyst-gold' => array(
+
+      'title'       => t('Analyst Gold Badge'),
+
+      'description' => t("Passed the Analyst(gold) course"),
+
+      'points'      => 200,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bag.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bag.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-a-g.png',
+
+	  ),
+
+    ),
+	
+	 'designer-bronze' => array(
+
+      'title'       => t('Designer Bronze Badge'),
+
+      'description' => t('Passed the Designer(bronze) course'),
+
+     // 'storage'     => 'comment-count',
+
+      'points'      => 100,
+
+      'images' => array(
+
+          'unlocked'  => 'sites/default/files/badges/icons/bdb.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bdb.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-d-b.png',
+
+           ),
+
+    ),
+
+
+  'designer-silver' => array(
+
+      'title'       => t('Designer Silver Badge'),
+
+      'description' => t("Passed the Designer(silver) course"),
+
+      'points'      => 150,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bds.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bds.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-d-s.png',
+
+	  ),
+
+    ),
+
+
+     'designer-gold' => array(
+
+      'title'       => t('Designer Gold Badge'),
+
+      'description' => t("Passed the Designer(gold) course"),
+
+      'points'      => 200,
+
+	  'images' => array(
+
+	  'unlocked'  => 'sites/default/files/badges/icons/bdg.png',
+
+	  'locked'    => 'sites/default/files/badges/icons/bdg.png',
+
+          'badge' =>  'sites/default/files/badges/icons/Badge-d-g.png',
+
+	  ),
+
+    )
+
+  );
+
+
+
+  return $achievements;
+
+}
+

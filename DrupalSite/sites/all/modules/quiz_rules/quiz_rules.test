@@ -1,0 +1,20 @@
+<?php
+class QuizRulesTestCase extends DrupalWebTestCase {
+  protected $privileged_user;
+
+  public static function getInfo() {
+    return array(
+      'name' => 'Quiz Rules Tests',
+      'description' => 'Ensure that the quiz_rules module functions properly.',
+      'group' => 'Quiz Rules',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp('quiz_rules');  
+    $this->privileged_user = $this->drupalCreateUser(array('administrator', 'view content'));
+    $this->drupalLogin($this->privileged_user);
+  }
+
+
+}

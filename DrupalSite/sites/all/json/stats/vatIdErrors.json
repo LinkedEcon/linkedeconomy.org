@@ -1,0 +1,24 @@
+[
+    {
+        "vatIdErrors": [
+            {
+                "year": "2013",
+                "numBuyers": "1345",
+                "numSellers": "33496",
+                "invalidSellersPercentage": "15",
+                "numPayments": "93762",
+                "amountPayments": "432155269128",
+                "invalidPaymentsPercentage": "0"
+            },
+            {
+                "year": "2014",
+                "numBuyers": "1450",
+                "numSellers": "41831",
+                "invalidSellersPercentage": "15",
+                "numPayments": "196202",
+                "amountPayments": "31148050423",
+                "invalidPaymentsPercentage": "4"
+            }
+        ]
+    }
+]

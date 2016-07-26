@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Installation functions for the couchdb module.
+ * 
+ * Copyright (c) 2010-2011 DOCOMO Communications Laboratories USA, Inc. 
+ * 
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function couchdb_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  $couch_vars = variable_get('couchdb', FALSE);
+  if ($phase == 'install') {
+    if (!$couch_vars) {
+      $requirements['couchdb']['severity'] = REQUIREMENT_ERROR;
+      $requirements['couchdb']['title'] = $t('CouchDB');
+      $requirements['couchdb']['description'] = $t('CouchDB module cannot be installed.  CouchDB cannot be reached. Make sure the $conf[\'couchdb\'] variable is set in settings.php.');
+    }
+  }
+  else {
+    if (!$couch_vars) {
+      $requirements['couchdb']['severity'] = REQUIREMENT_ERROR;
+      $requirements['couchdb']['title'] = $t('CouchDB');
+      $requirements['couchdb']['value'] = $t('Connection setting not found');
+      $requirements['couchdb']['description'] = $t('Error trying to reach CouchDB. Make sure the $conf[\'couchdb\'] variable is set in settings.php.');
+    }
+    
+  }
+  return $requirements;
+}

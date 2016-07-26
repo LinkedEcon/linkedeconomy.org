@@ -1,0 +1,28 @@
+[
+    {
+        "analytics": [
+            {
+                "year": "2013",
+                "numBuyers": "1125",
+                "numSellers": "32403",
+                "numTenders": "6223",
+                "amountTenders": "1066438436",
+                "numContracts": "40666",
+                "amountContracts": "4756505493",
+                "numPayments": "91900",
+                "amountPayments": "432079430696"
+            },
+            {
+                "year": "2014",
+                "numBuyers": "1069",
+                "numSellers": "28047",
+                "numTenders": "420",
+                "amountTenders": "48072486",
+                "numContracts": "10169",
+                "amountContracts": "538645588",
+                "numPayments": "101665",
+                "amountPayments": "15351559335"
+            }
+        ]
+    }
+]

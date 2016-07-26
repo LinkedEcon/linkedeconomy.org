@@ -1,0 +1,435 @@
+<?php
+
+/**
+ * @file
+ * Installs the petition module
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function petition_schema() {
+  $schema = array();
+  $schema['petition'] = array(
+    'description' => 'Table for storing additional properties for petition nodes.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The node identifier of a petition',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'pemail' => array(
+        'description' => 'Email address to receive results',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'pfreq' => array(
+        'description' => 'Frequency to receive emails',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'poptfields' => array(
+        'description' => 'Optional fields for the petition',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'reqfields' => array(
+        'description' => 'Required fields for the petition',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'emailsubject' => array(
+        'description' => 'Customized email subject to the signer',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'emailbody' => array(
+        'description' => 'Customized email body to the signer',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'presfields' => array(
+        'description' => 'Result fields to show',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'display_mode' => array(
+        'description' => 'The display mode of the signatures',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'signatures' => array(
+        'description' => 'The number of signatures to the petition',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'activation' => array(
+        'description' => 'Whether the signature form is activated or not',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '1',
+      ),
+      'inactivation_message' => array(
+        'description' => 'The message displayed instead of the signature form if inactive',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'limit_date' => array(
+        'description' => 'Unix timetstamp of the limit date for the campaign setting',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'signature_goal' => array(
+        'description' => 'Signature goal for the campaign setting',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'campaign_settings' => array(
+        'description' => 'campaign mode',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'auto_inactivation' => array(
+        'description' => 'auto inactivation mode',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'hide_signatures_tab' => array(
+        'description' => 'Hide the signatures tab',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+
+  $schema['petition_signatures'] = array(
+    'description' => 'Table for storing the signatures.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The node identifier of a petition signature',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'cid' => array(
+        'description' => 'The signature identifier of a petition signature',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'name' => array(
+        'description' => 'The name in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'firstname' => array(
+        'description' => 'The firstname in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'title' => array(
+        'description' => 'The description in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'address' => array(
+        'description' => 'The address in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'zip' => array(
+        'description' => 'The zip code in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'town' => array(
+        'description' => 'The town in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'country' => array(
+        'description' => 'The country in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'tel' => array(
+        'description' => 'The tel in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'email' => array(
+        'description' => 'The email in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'remote_address' => array(
+        'description' => 'The remote address in the signature. Transformed into country code upon confirmation',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'date' => array(
+        'description' => 'The date of the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'hash' => array(
+        'description' => 'The hash for the confirmation',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'confirmed' => array(
+        'description' => 'Whether the signature is confirmed or not',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'position' => array(
+        'description' => 'The position of a signature within a given petition',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'canbe_informed' => array(
+        'description' => 'Whether the petitioner accepts to be informed aout the petition campaign',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'language' => array(
+        'description' => 'The language of the signed petition',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'profession' => array(
+        'description' => 'The profession in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'institution' => array(
+        'description' => 'The institution in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'website' => array(
+        'description' => 'The website in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'comment' => array(
+        'description' => 'The comment in the signature',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'comment_format' => array(
+        'description' => 'The comment format',
+        'type' => 'text',
+      ),
+      'initial_signer' => array(
+        'description' => 'The initial signer flag',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cid'),
+  );
+
+  $schema['petition_translation'] = array(
+    'description' => 'Table for storing the translations of email subjects and body.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The node identifier of the translation',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'tnid' => array(
+        'description' => 'The node identifier of original version',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => '0',
+      ),
+      'language' => array(
+        'description' => 'The language code of the translation',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'tsubject' => array(
+        'description' => 'The translated subject',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+      'tbody' => array(
+        'description' => 'The translated body',
+        'type' => 'text',
+        'default' => NULL,
+      ),
+    ),
+    'primary key' => array('nid'),
+  );
+  return $schema;
+
+}
+
+/**
+ * Implements hook_install().
+ */
+function petition_install() {
+  db_update('system')
+  ->fields(array('weight' => -1))
+  ->condition('name', 'petition')
+  ->condition('type', 'module')
+  ->execute();
+
+  // Ensure the Petition node type is available.
+  node_types_rebuild();
+  $types = node_type_get_types();
+  // Add the body field.
+  node_add_body_field($types['petition']);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function petition_uninstall() {
+  watchdog("petition", "Removing petition module.");
+
+  // Remove petition variables
+  variable_del("petition_country_check");
+  variable_del("petition_country_restriction");
+  variable_del("petition_signature_fields_form");
+  variable_del("petition_report_fields_fields");
+  variable_del("petition_emailsubject_to_maintainer");
+  variable_del("petition_emailbody_to_maintainer");
+  variable_del("petition_signature_number");
+  variable_del('petition_email_confirmation_required');
+  variable_del('petition_last_x_to_show');
+  variable_del('petition_initial_signers_to_show');
+
+  watchdog("petition", "Petition module removed");
+}
+
+/**
+ * Updates the schema from the 6.x version.
+ */
+function petition_update_7000() {
+  // Upgrading from 6.x-1.5 or 6.x-2.x, we'll need to drop these fields
+  // relating to ip/country_api restrictions.
+  db_drop_field('petition', 'pccheck');
+  db_drop_field('petition', 'pcrest');
+  db_drop_field('petition', 'pcountry');
+
+  // We don't need these variables any more.
+  variable_del("petition_country_check");
+  variable_del("petition_country_restriction");
+
+  // If it's a 6.x-1.5 to 7.x-2.x upgrade, we'll need to add some db fields.
+
+  if (!db_field_exists('petition', 'hide_signatures_tab')) {
+    // The hide_signatures_tab column doesn't exist, so it must be an upgrade
+    // from  6.x-1.5.
+    db_add_field('petition', 'hide_signatures_tab', array(
+      'description' => 'Hide the signatures tab',
+      'type' => 'int',
+      'not null' => TRUE,
+      'default' => '0',
+      'initial' => '0',
+    ));
+
+    db_add_field('petition_signatures', 'profession', array(
+      'description' => 'The profession in the signature',
+      'type' => 'text',
+      'default' => NULL,
+      'initial' => NULL,
+    ));
+
+    db_add_field('petition_signatures', 'institution', array(
+      'description' => 'The institution in the signature',
+      'type' => 'text',
+      'default' => NULL,
+      'initial' => NULL,
+    ));
+
+    db_add_field('petition_signatures', 'website', array(
+      'description' => 'The website in the signature',
+      'type' => 'text',
+      'default' => NULL,
+      'initial' => NULL,
+    ));
+
+    db_add_field('petition_signatures', 'comment', array(
+      'description' => 'The comment in the signature',
+      'type' => 'text',
+      'default' => NULL,
+      'initial' => NULL,
+    ));
+
+    db_add_field('petition_signatures', 'comment_format', array(
+      'description' => 'The comment format',
+      'type' => 'text',
+      'default' => 'plain_text',
+      'initial' => 'plain_text',
+    ));
+
+    db_add_field('petition_signatures', 'initial_signer', array(
+      'description' => 'The initial signer flag',
+      'type' => 'int',
+      'unsigned' => TRUE,
+      'default' => 0,
+      'initial' => 0,
+    ));
+  }
+  else {
+    // It's an upgrade from 6.x-2.x so we need to change the comment_format column.
+    db_change_field('petition_signatures', 'comment_format', 'comment_format', array(
+      'description' => 'The comment format',
+      'type' => 'text',
+      'default' => 'plain_text',
+    ));
+  }
+
+  update_signature_count();
+}
+
+
+function update_signature_count() {
+  $result = db_query("SELECT * FROM {petition}");
+  while ($petition = db_fetch_object($result)) {
+    // For each petition, update the signature count
+    $signature_count = db_query("SELECT COUNT(cid) FROM {petition_signatures} WHERE nid = :nid AND confirmed = :confirmed", array(':nid' => $petition->nid, ':confirmed' => 1))->fetchField();
+    $signature_count = is_numeric($signature_count) ? $signature_count : 0;
+    db_update('petition')
+      ->fields(array('signatures' => $signature_count))
+      ->condition('nid', $petition->nid)
+      ->execute();
+
+    // For each petition and for each signaure, update the signature position
+    $signatures = db_query("SELECT * FROM {petition_signatures} WHERE nid = :nid AND confirmed = :confirmed ORDER BY cid ASC", array(':nid' => $petition->nid, ':confirmed' => 1));
+    $position = 0;
+    while ($signature = db_fetch_object($signatures)) {
+      $position += 1;
+      db_update('petition_signatures')
+        ->fields(array('position' => $position))
+        ->condition('nid', $signature->nid)
+        ->condition('cid', $signature->cid)
+        ->execute();
+    }
+  }
+}
