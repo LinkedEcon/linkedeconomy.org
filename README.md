@@ -10,9 +10,15 @@ Site Version: 0.38 15/07/2016
 Application has been tested for import/export with Acquia Dev desktop 2
 
 Instructions:
-Unzip and import database dump
 
-1. Set sites\default\settings.php
+
+Download files and database dump.
+Unzip database dump
+Copy files to your local webserver.
+Import the database dump.
+Change database settings in your settings.php in the sites/.. directory.
+
+For external data from Couchdb or Virtuoso localhost server is assumed.
 
 
 
